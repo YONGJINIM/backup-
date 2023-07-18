@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.smhrd.dao.ReplyDAO">
+   <insert id="replyInsert">
+      insert into replyboard(re_no, no, coment, userid, writedate) 
+      values(reply_no_seq.nextval, ${no}, #{coment}, #{userid}, sysdate)
+   </insert>
+   
+   <select id="replySelect" resultType="kr.or.smhrd.dto.ReplyDTO">
+       select re_no, coment, userid, writedate 
+       from replyboard where no=${param1}
+       order by re_no desc
+   </select>
+   
+   <update id="replyUpdate">
+      update replyboard set coment = #{coment}, writedate = sysdate where re_no=${re_no}
+   </update>
+   
+   <delete id="replyDelete">
+      delete from replyboard where re_no = ${param1}
+   </delete>
+</mapper>
